@@ -1,0 +1,24 @@
+#canvasRoi {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 50%;
+}
+
+#canvasgray {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  width: 100%;
+  height: 50%;
+}
+
+#frame {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 50%;
+  z-index: 1;
+}
