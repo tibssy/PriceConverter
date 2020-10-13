@@ -39,3 +39,5 @@ navigator.mediaDevices
   });
 
 openCvReady();
+
+//Set.prototype.add(value)
