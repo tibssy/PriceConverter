@@ -1,8 +1,8 @@
 function openCvReady() {
   cv["onRuntimeInitialized"] = () => {
     let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
-    let roi = new cv.Mat(video.height, video.width, cv.CV_8UC4);
-    let roi1 = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+ //   let roi = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+ //   let roi1 = new cv.Mat(video.height, video.width, cv.CV_8UC4);
     let gray = new cv.Mat(video.height, video.width, cv.CV_8UC1);
     let cap = new cv.VideoCapture(video);
 
@@ -10,13 +10,12 @@ function openCvReady() {
     function processVideo() {
       let begin = Date.now();
       cap.read(img);
-      let rect = new cv.Rect(200, 150, 400, 300);
-      let rect1 = new cv.Rect(45, 60, 310, 180);
-      roi = img.roi(rect);
-      roi1 = roi.roi(rect1);
-      cv.cvtColor(roi1, gray, cv.COLOR_RGBA2GRAY);
+  //    let rect = new cv.Rect(200, 150, 400, 300);
+  //    let rect1 = new cv.Rect(45, 60, 310, 180);
+  //    roi = img.roi(rect);
+  //    roi1 = roi.roi(rect1);
+      cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
 
-      cv.imshow("canvasRoi", roi);
       cv.imshow("canvasgray", gray);
       let delay = 1000 / FPS - (Date.now() - begin);
       setTimeout(processVideo, delay);
@@ -39,5 +38,3 @@ navigator.mediaDevices
   });
 
 openCvReady();
-
-//Set.prototype.add(value)
