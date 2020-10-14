@@ -25,7 +25,7 @@ function openCvReady() {
 // the code starts here
 let video = document.getElementById("videoInput");
 navigator.mediaDevices
-  .getUserMedia({ video: { facingMode: "environment" }, audio: false })
+  .getUserMedia({ video: { facingMode: "left" }, audio: false })
   .then(function (stream) {
     video.srcObject = stream;
     video.play();
