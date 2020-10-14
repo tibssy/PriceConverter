@@ -13,7 +13,6 @@ function openCvReady() {
       roi = img.roi(rect);
       cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
 
-      cv.imshow("canvasRoi", img);
       cv.imshow("canvasgray", gray);
       let delay = 1000 / FPS - (Date.now() - begin);
       setTimeout(processVideo, delay);
