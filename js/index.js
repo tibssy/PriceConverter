@@ -16,6 +16,7 @@ function openCvReady() {
       cv.threshold(gray, thres, 130, 255, cv.THRESH_BINARY);
       cv.filter2D(thres, dst, cv.CV_8U, M, anchor, 0, cv.BORDER_DEFAULT);
       cv.imshow("canvasgray", dst);
+      console.log(dst);
       let delay = 1000 / FPS - (Date.now() - begin);
       setTimeout(processVideo, delay);
     }
