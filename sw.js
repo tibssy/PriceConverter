@@ -5,7 +5,8 @@ const assets = [
   'js/index.js',
   'js/opencv.js',
   'css/index.css',
-  'img/frame.png',
+  'css/bootstrap.min.css',
+  'css/bootstrap.min.css.map',
 ];
 
 self.addEventListener("install", evt => {
