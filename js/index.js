@@ -41,7 +41,7 @@ navigator.mediaDevices
     }
     track.applyConstraints({ advanced: [{ zoom: zoom.value }] });
     let imageCapture = new ImageCapture(track);
-    //   video.play();
+    video.play();
   })
   .catch(function (err) {
     console.log("An error occurred! " + err);
