@@ -15,7 +15,7 @@ function openCvReady() {
       let begin = Date.now();
       cap.read(img);
       cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
-      cv.threshold(gray, thres, 130, 255, cv.THRESH_BINARY);
+      cv.threshold(gray, thres, 130, 255, cv.THRESH_BINARY_INV);
       cv.filter2D(thres, blure, cv.CV_8U, M, anchor, 0, cv.BORDER_DEFAULT);
       cv.erode(blure, dst, ME, anchor, 1, cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
       cv.imshow("canvasgray", dst);
