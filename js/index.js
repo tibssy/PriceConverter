@@ -1,38 +1,44 @@
-navigator.mediaDevices.getUserMedia({ video: true })
-  .then(async mediaStream => {
-    document.querySelector('video').srcObject = mediaStream;
+function openCvReady() {
+  cv["onRuntimeInitialized"] = () => {
+    let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+    let gray = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    let thres = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    let blure = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    let M = cv.Mat.eye(3, 3, cv.CV_32FC1);
+    let ME = cv.Mat.ones(5, 5, cv.CV_8U);
+    let anchor = new cv.Point(-1, -1);
+    let cap = new cv.VideoCapture(video);
 
-    // Once crbug.com/711524 is fixed, we won't need to wait anymore. This is
-    // currently needed because capabilities can only be retrieved after the
-    // device starts streaming. This happens after and asynchronously w.r.t.
-    // getUserMedia() returns.
-    await sleep(1000);
-
-    const track = mediaStream.getVideoTracks()[0];
-    const capabilities = track.getCapabilities();
-    const settings = track.getSettings();
-
-    const input = document.querySelector('input[type="range"]');
-
-    // Check whether zoom is supported or not.
-    if (!('zoom' in capabilities)) {
-      return Promise.reject('Zoom is not supported by ' + track.label);
+    const FPS = 30;
+    function processVideo() {
+      let begin = Date.now();
+      cap.read(img);
+      cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
+      cv.threshold(gray, thres, 130, 255, cv.THRESH_BINARY);
+      cv.filter2D(thres, blure, cv.CV_8U, M, anchor, 0, cv.BORDER_DEFAULT);
+      cv.erode(blure, dst, ME, anchor, 1, cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+      cv.imshow("canvasgray", dst);
+      let delay = 1000 / FPS - (Date.now() - begin);
+      setTimeout(processVideo, delay);
     }
 
-    // Map zoom to a slider element.
-    input.min = capabilities.zoom.min;
-    input.max = capabilities.zoom.max;
-    input.step = capabilities.zoom.step;
-    input.value = settings.zoom;
-    input.oninput = function () {
-      track.applyConstraints({ advanced: [{ zoom: 2 }] });
-    }
-    input.hidden = false;
-  })
-  .catch(error => console.log('Argh!', error.name || error));
-
-/* Utils */
-
-function sleep(ms = 0) {
-  return new Promise(r => setTimeout(r, ms));
+    setTimeout(processVideo, 0);
+  };
 }
+
+// the code starts here
+let video = document.getElementById("videoInput");
+navigator.mediaDevices
+  .getUserMedia({ video: { facingMode: "environment" }, audio: false })
+  .then(function (stream) {
+    video.srcObject = stream;
+    video.play();
+  })
+  .catch(function (err) {
+    console.log("An error occurred! " + err);
+  });
+
+openCvReady();
+
+//Set.prototype.add(value)
