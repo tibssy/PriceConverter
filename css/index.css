@@ -10,8 +10,8 @@ body{
 
 #videoInput {
   margin: auto;
-  width: 94%;
-  height: 100%;  
+  width: 80%;
+  height: 80%;  
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
 }
