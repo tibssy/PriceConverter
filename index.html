@@ -10,12 +10,11 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="img/price_128.png">
   <meta name="theme-color" content="#FFE1C4">
-  <script src='https://unpkg.com/tesseract.js@v2.1.4/dist/tesseract.min.js'></script>
 </head>
 
 <body>
   <div class="row">
-    <video id="videoInput" width="640" height="480" style="display: none;"></video>
+    <video id="videoInput" width="640" height="480"></video>
   </div>
 
   <div class="row">
@@ -24,18 +23,10 @@
       <canvas id="canvasgray"></canvas>
     </div>
     <div class="col-3"></div>
-
-    <div class="row">
-      <div class="col-3"></div>
-      <div class="col-6">
-        <h1 id="result"></h1>
-      </div>
-      <div class="col-3"></div>
-    </div>
   </div>
 
-  <script src="js/opencv.js"></script>
-  <script src="js/index.js"></script>
+  <script type="text/javascript" src="js/opencv.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
   <script src="js/app.js"></script>
 </body>
 
