@@ -4,6 +4,8 @@ const assets = [
   'js/app.js',
   'js/index.js',
   'js/opencv.js',
+  'js/stfilter.js',
+  'js/mathjs/math.js',
   'css/index.css',
   'css/bootstrap.min.css',
   'css/bootstrap.min.css.map',
