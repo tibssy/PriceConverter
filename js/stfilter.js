@@ -52,6 +52,7 @@ function filter(stats, resolution) {
     }
 
 
+    const max_char = 8;
     let size = math.size(stats);
 
     stats = edge_filter(stats, resolution);
@@ -62,7 +63,7 @@ function filter(stats, resolution) {
     if (stats.length >= 2) {
         max_height = math.max(math.column(stats, 3));
         frame_limit = max_height / 10;
-        space_limit = frame_limit * 3.5;
+        space_limit = frame_limit * 4;
         stats = filter_c(stats);
         if (stats.length >= 2) {
             stats = filter_tiny(stats);
@@ -71,6 +72,6 @@ function filter(stats, resolution) {
             }
         }
     }
-
-    return stats;
+    console.log("stats: ", stats);
+    return stats.slice(0, max_char);
 }
