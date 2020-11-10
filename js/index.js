@@ -3,7 +3,10 @@ function openCvReady() {
     let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
     let gray = new cv.Mat(video.height, video.width, cv.CV_8UC1);
     let thresh = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    let median = new cv.Mat(video.height, video.width, cv.CV_8UC1);
     let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    let M = cv.Mat.ones(5, 5, cv.CV_8U);
+    let anchor = new cv.Point(-1, -1);
     let label = new cv.Mat();
     let stats = new cv.Mat();
     let centroids = new cv.Mat();
@@ -15,10 +18,13 @@ function openCvReady() {
       let begin = Date.now();
       cap.read(img);
       cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
-      cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU);
-      cv.medianBlur(thresh, dst, 5);
-      cv.connectedComponentsWithStats(dst, label, stats, centroids, 8, cv.CV_32S);
+      cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
+      cv.medianBlur(thresh, median, 5);
+      cv.erode(median, dst, M, anchor, 1, cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
 
+
+      dst = auto_inv(dst);
+      cv.connectedComponentsWithStats(dst, label, stats, centroids, 8, cv.CV_32S);
       let res = prepare_stats(stats);
       if (res.length >= 2) {
         res = filter(res, resolution);
@@ -48,7 +54,12 @@ function prepare_stats(stats) {
   let rows = stats.rows;
   let arr = Array.from(stats.data32S);
   let reshaped = math.reshape(arr, [rows, cols]);
-  return math.subset(reshaped, math.index(math.range(1, rows), math.range(0, 4)));
+  return reshaped.slice(1).map(i => i.slice(0, 4));
+}
+
+function auto_inv(dst) {
+  Math.round(cv.countNonZero(dst) / (dst.cols * dst.rows) * 100) > 50 ? cv.bitwise_not(dst, dst) : false;
+  return dst;
 }
 
 // the code starts here

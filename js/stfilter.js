@@ -72,6 +72,6 @@ function filter(stats, resolution) {
             }
         }
     }
-    console.log("stats: ", stats);
+    //  console.log("stats: ", stats);
     return stats.slice(0, max_char);
 }
