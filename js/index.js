@@ -3,10 +3,6 @@ function openCvReady() {
     let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
     let gray = new cv.Mat(video.height, video.width, cv.CV_8UC1);
     let thresh = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-    let median = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-    let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-    let M = cv.Mat.ones(5, 5, cv.CV_8U);
-    let anchor = new cv.Point(-1, -1);
     let label = new cv.Mat();
     let stats = new cv.Mat();
     let centroids = new cv.Mat();
@@ -19,27 +15,34 @@ function openCvReady() {
       cap.read(img);
       cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
       cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
-      cv.medianBlur(thresh, median, 5);
-      cv.erode(median, dst, M, anchor, 1, cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
 
 
-      dst = auto_inv(dst);
-      cv.connectedComponentsWithStats(dst, label, stats, centroids, 8, cv.CV_32S);
+      thresh = auto_inv(thresh);
+      cv.connectedComponentsWithStats(thresh, label, stats, centroids, 8, cv.CV_32S);
       let res = prepare_stats(stats);
       if (res.length >= 2) {
         res = filter(res, resolution);
 
-        res.forEach(segment => {
-          let point1 = new cv.Point(segment[0], segment[1]);
-          let point2 = new cv.Point(segment[0] + segment[2], segment[1] + segment[3]);
-          cv.rectangle(img, point1, point2, [0, 255, 0, 255], 2, cv.LINE_AA, 0);
-        });
+        if (feedback(res, resolution) >= 6) {
+          let result = "";
+          res.forEach(segment => {
+            let point1 = new cv.Point(segment[0], segment[1]);
+            let point2 = new cv.Point(segment[0] + segment[2], segment[1] + segment[3]);
+            cv.rectangle(img, point1, point2, [0, 255, 0, 255], 2, cv.LINE_AA, 0);
+            let rect = new cv.Rect(segment[0], segment[1], segment[2], segment[3]);
+            sgmt = thresh.roi(rect);
+            let num = detect(sgmt);
+            result += num;
+          });
+          console.log("result: ", result);
+          document.getElementById("result").innerHTML = result;
+        }
       };
 
 
 
       cv.imshow("canvasvideo", img);
-      cv.imshow("canvasgray", dst);
+      cv.imshow("canvasgray", thresh);
       let delay = 1000 / FPS - (Date.now() - begin);
       setTimeout(processVideo, delay);
     }
@@ -55,6 +58,15 @@ function prepare_stats(stats) {
   let arr = Array.from(stats.data32S);
   let reshaped = math.reshape(arr, [rows, cols]);
   return reshaped.slice(1).map(i => i.slice(0, 4));
+}
+
+
+function feedback(stats, resolution) {
+  let last_col = stats[stats.length - 1]
+  let point1 = math.dotMultiply([stats[0][0], stats[0][1]], -1);
+  let point2 = [last_col[0] + last_col[2], last_col[1] + last_col[3]];
+  let big_area = math.prod(math.add(point2, point1));
+  return big_area / math.prod(resolution) * 100;
 }
 
 function auto_inv(dst) {
@@ -76,4 +88,3 @@ navigator.mediaDevices
 
 openCvReady();
 
-//Set.prototype.add(value)

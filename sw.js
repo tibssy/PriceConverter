@@ -2,6 +2,7 @@ const staticCacheName = 'site-static';
 const assets = [
   'index.html',
   'js/app.js',
+  'js/onr.js',
   'js/index.js',
   'js/opencv.js',
   'js/stfilter.js',
@@ -9,6 +10,7 @@ const assets = [
   'css/index.css',
   'css/bootstrap.min.css',
   'css/bootstrap.min.css.map',
+  'data/data.json',
 ];
 
 self.addEventListener("install", evt => {
