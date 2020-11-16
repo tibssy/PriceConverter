@@ -22,24 +22,23 @@ function openCvReady() {
       let res = prepare_stats(stats);
       if (res.length >= 2) {
         res = filter(res, resolution);
-
-        if (feedback(res, resolution) >= 6) {
-          let result = "";
-          res.forEach(segment => {
-            let point1 = new cv.Point(segment[0], segment[1]);
-            let point2 = new cv.Point(segment[0] + segment[2], segment[1] + segment[3]);
-            cv.rectangle(img, point1, point2, [0, 255, 0, 255], 2, cv.LINE_AA, 0);
-            let rect = new cv.Rect(segment[0], segment[1], segment[2], segment[3]);
-            sgmt = thresh.roi(rect);
-            let num = detect(sgmt);
-            result += num;
-          });
-          console.log("result: ", result);
-          document.getElementById("result").innerHTML = result;
+        if (res.length >= 2) {
+          if (feedback(res, resolution) >= 6) {
+            let result = "";
+            res.forEach(segment => {
+              let point1 = new cv.Point(segment[0], segment[1]);
+              let point2 = new cv.Point(segment[0] + segment[2], segment[1] + segment[3]);
+              cv.rectangle(img, point1, point2, [0, 255, 0, 255], 2, cv.LINE_AA, 0);
+              let rect = new cv.Rect(segment[0], segment[1], segment[2], segment[3]);
+              sgmt = thresh.roi(rect);
+              let num = detect(sgmt);
+              result += num;
+            });
+            console.log("result: ", result);
+            document.getElementById("result").innerHTML = result;
+          }
         }
-      };
-
-
+      }
 
       cv.imshow("canvasvideo", img);
       cv.imshow("canvasgray", thresh);
