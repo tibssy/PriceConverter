@@ -23,7 +23,7 @@ function openCvReady() {
       if (res.length >= 2) {
         res = filter(res, resolution);
         if (res.length >= 2) {
-          if (feedback(res, resolution) >= 6) {
+          if (feedback(res, resolution) >= 5) {
             let result = "";
             res.forEach(segment => {
               let point1 = new cv.Point(segment[0], segment[1]);
