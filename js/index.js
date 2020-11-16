@@ -40,6 +40,9 @@ function openCvReady() {
             document.getElementById("result").innerHTML = result;
           }
         }
+        else {
+          let result = "";
+        }
       }
 
       //    cv.imshow("canvasvideo", img);
