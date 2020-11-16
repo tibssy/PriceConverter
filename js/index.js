@@ -26,9 +26,9 @@ function openCvReady() {
           if (feedback(res, resolution) >= 5) {
             let result = "";
             res.forEach(segment => {
-              let point1 = new cv.Point(segment[0], segment[1]);
-              let point2 = new cv.Point(segment[0] + segment[2], segment[1] + segment[3]);
-              cv.rectangle(img, point1, point2, [0, 255, 0, 255], 2, cv.LINE_AA, 0);
+              //        let point1 = new cv.Point(segment[0], segment[1]);
+              //        let point2 = new cv.Point(segment[0] + segment[2], segment[1] + segment[3]);
+              //        cv.rectangle(img, point1, point2, [0, 255, 0, 255], 2, cv.LINE_AA, 0);
               let rect = new cv.Rect(segment[0], segment[1], segment[2], segment[3]);
               sgmt = thresh.roi(rect);
               let num = detect(sgmt);
@@ -40,8 +40,8 @@ function openCvReady() {
         }
       }
 
-      cv.imshow("canvasvideo", img);
-      cv.imshow("canvasgray", thresh);
+      //    cv.imshow("canvasvideo", img);
+      //    cv.imshow("canvasgray", thresh);
       let delay = 1000 / FPS - (Date.now() - begin);
       setTimeout(processVideo, delay);
     }
