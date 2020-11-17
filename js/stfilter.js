@@ -36,6 +36,14 @@ function filter(stats, resolution) {
         return arr;
     }
 
+    function filter_dot(stats) {
+        const heights = math.column(stats, 3);
+        const isLowerNumber = (element) => element < max_height * 0.4;
+        let index = heights.findIndex(isLowerNumber);
+        index != -1 ? stats = stats.slice(0, index + 3) : false;
+        return stats;
+    }
+
     function filter_right(stats) {
         stats.sort(function (a, b) {
             return a[0] - b[0];
@@ -48,6 +56,7 @@ function filter(stats, resolution) {
         const isLargeNumber = (element) => element > space_limit;
         let index = distance.findIndex(isLargeNumber);
         index != -1 ? stats = stats.slice(0, index + 1) : false;
+        stats.length > 1 ? stats = filter_dot(stats) : false;
         return stats;
     }
 
@@ -63,7 +72,7 @@ function filter(stats, resolution) {
     if (stats.length >= 2) {
         max_height = math.max(math.column(stats, 3));
         frame_limit = max_height / 10;
-        space_limit = frame_limit * 4;
+        space_limit = frame_limit * 4.5;
         stats = filter_c(stats);
         if (stats.length >= 2) {
             stats = filter_tiny(stats);
