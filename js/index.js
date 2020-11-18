@@ -42,7 +42,7 @@ function openCvReady() {
         }
       }
 
-      cv.imshow("canvasout", img);
+      //  cv.imshow("canvasout", img);
       //    cv.imshow("canvasgray", thresh);
       let delay = 1000 / FPS - (Date.now() - begin);
       setTimeout(processVideo, delay);

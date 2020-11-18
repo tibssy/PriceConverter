@@ -16,17 +16,30 @@ body{
   box-shadow: 0 5px 10px 0;
 }
 
-#result {
-  width: 100%;
-  margin:auto;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px 0;
-}
-
 #canvasout {
   margin: auto;
   width: 94%;
   height: 100%;  
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
+}
+
+.res {
+  position: relative;
+  margin: auto;
+  background-color: #ffeac8;
+  top: 25px;
+  width: 94%;
+  height: 100px;
+  padding: 100px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px 0;
+}
+
+p {
+  text-align: center;
+  color: #b9780e;
+  font-size: 50px;
+  font-family: "Times New Roman", Times, serif;
+  
 }
