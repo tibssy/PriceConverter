@@ -2,7 +2,7 @@ body{
   background-color: moccasin;
 }
 
-.container {
+.row {
   width: 480px;
   height: 640px;
   overflow: hidden;
