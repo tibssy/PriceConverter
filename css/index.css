@@ -2,18 +2,21 @@ body{
   background-color: moccasin;
 }
 
-.row {
-  width: 100%;
+.container {
+  width: 480px;
+  height: 640px;
+  overflow: hidden;
+  display: block;
   margin: auto;
   padding-top: 16px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px 0;
+  zoom: 125%;
 }
 
 #videoInput {
-  margin: auto;
-  width: 94%;
-  height: 100%;  
-  border-radius: 5px;
-  box-shadow: 0 5px 10px 0;
+  margin-left: -60px;
+  margin-top: -80px;
 }
 
 #canvasout {

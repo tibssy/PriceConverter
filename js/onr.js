@@ -49,6 +49,7 @@ function decoder(data) {
         let diff = math.sum(math.abs(math.subtract(val, data)));
         res.push(diff);
     });
+    // console.log(math.min(res));
     return model[res.indexOf(math.min(res))][0];
 }
 
