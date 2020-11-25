@@ -2,29 +2,24 @@ body{
   background-color: moccasin;
 }
 
-.row {
-  width: 480px;
-  height: 640px;
+.cntr {
+  width: 160vw;
+  height: auto;
   overflow: hidden;
   display: block;
+  zoom: 60%;
   margin: auto;
   padding-top: 16px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px 0;
-  zoom: 125%;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0;
 }
 
 #videoInput {
-  margin-left: -60px;
-  margin-top: -80px;
-}
-
-#canvasout {
-  margin: auto;
-  width: 94%;
-  height: 100%;  
-  border-radius: 5px;
-  box-shadow: 0 5px 10px 0;
+  width: 200vw;
+  height: auto;
+  margin-left: -20vw;
+  margin-top: -10vh;
+  margin-bottom: -10vh;
 }
 
 .res {
@@ -32,8 +27,8 @@ body{
   margin: auto;
   background-color: #ffeac8;
   top: 25px;
-  width: 94%;
-  height: 100px;
+  width: 96vw;
+  height: auto;
   padding: 100px;
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
