@@ -4,13 +4,13 @@ body{
 
 .cntr {
   position: relative;
-  width: 50vw;
+  width: 60vw;
   height: auto;
   overflow: hidden;
   display: block;
-  transform: scale(1.88);
+  transform: scale(1.57);
   margin: auto;
-  padding-top: 16px;
+  padding-top: 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
 }
@@ -18,7 +18,7 @@ body{
 #videoInput {
   width: 100vw;
   height: auto;
-  margin-left: -25vw;
+  margin-left: -20vw;
   margin-top: -30vh;
   margin-bottom: -30vh;
 }
