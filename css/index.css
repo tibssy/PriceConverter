@@ -7,7 +7,9 @@ body{
   height: auto;
   overflow: hidden;
   display: block;
-  zoom: 120%;
+  zoom: 125%;
+  margin: auto;
+  padding-top: 16px;
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
 }
