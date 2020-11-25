@@ -2,6 +2,11 @@ body{
   background-color: moccasin;
 }
 
+.a {
+  padding-top: 16px;
+
+}
+
 .cntr {
   position: relative;
   width: 60vw;
@@ -10,7 +15,6 @@ body{
   display: block;
   transform: scale(1.57);
   margin: auto;
-  padding-top: 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
 }
