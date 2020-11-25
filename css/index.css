@@ -3,6 +3,7 @@ body{
 }
 
 .cntr {
+  position: relative;
   width: 50vw;
   height: auto;
   overflow: hidden;
