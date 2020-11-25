@@ -3,11 +3,11 @@ body{
 }
 
 .cntr {
-  width: 80vw;
+  width: 100vw;
   height: auto;
   overflow: hidden;
   display: block;
-  zoom: 150%;
+  zoom: 125%;
   margin: auto;
   padding-top: 16px;
   border-radius: 5px;
@@ -15,7 +15,7 @@ body{
 }
 
 #videoInput {
-  width: 100vw;
+  width: 125vw;
   height: auto;
   margin-left: -10vw;
   margin-top: -10vh;
