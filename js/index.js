@@ -14,8 +14,10 @@ function openCvReady() {
       let begin = Date.now();
       cap.read(img);
       cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
-      let rect = new cv.Rect(220, 720, 640, 480);
+      console.log("gray: " + gray.cols + "x" + gray.cols);
+      const rect = new cv.Rect(220, 720, 640, 480);
       gray = gray.roi(rect);
+      console.log("roi: " + gray.cols + "x" + gray.cols);
       cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
 
 
