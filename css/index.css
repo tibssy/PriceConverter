@@ -30,9 +30,9 @@ body{
   position: relative;
   margin: auto;
   background-color: #ffeac8;
-  top: 150px;
+  top: 100px;
   width: 94vw;
-  height: 50px;
+  height: 100px;
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
 }
