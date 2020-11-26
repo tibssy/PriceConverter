@@ -1,25 +1,23 @@
 function openCvReady() {
   cv["onRuntimeInitialized"] = () => {
-    let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
-    let gray = new cv.Mat(video.height, video.width, cv.CV_8UC1);
     const rect = new cv.Rect(144, 384, 432, 512);
-    let roi_gray = new cv.Mat();
+    let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+    let img_roi = new cv.Mat();
+    let gray = new cv.Mat();
     let thresh = new cv.Mat();
     let label = new cv.Mat();
     let stats = new cv.Mat();
     let centroids = new cv.Mat();
-    let resolution = [img.cols, img.rows];
+    let resolution = [rect.width, rect.height];
     let cap = new cv.VideoCapture(video);
 
     const FPS = 30;
     function processVideo() {
       let begin = Date.now();
       cap.read(img);
-      cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
-      console.log("gray: " + gray.rows + "x" + gray.cols);
-      roi_gray = gray.roi(rect);
-      console.log("roi: " + roi_gray.cols + "x" + roi_gray.rows);
-      cv.threshold(roi_gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
+      img_roi = img.roi(rect);
+      cv.cvtColor(img_roi, gray, cv.COLOR_RGBA2GRAY);
+      cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
 
 
       thresh = auto_inv(thresh);
