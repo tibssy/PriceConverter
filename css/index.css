@@ -14,8 +14,8 @@ body{
   display: block;
   transform: scale(1.57);
   margin: auto;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px 0;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px 0;
 }
 
 #videoInput {
@@ -32,7 +32,7 @@ body{
   background-color: #ffeac8;
   top: 100px;
   width: 94vw;
-  height: 100px;
+  height: 160px;
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
 }
