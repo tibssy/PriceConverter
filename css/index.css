@@ -29,11 +29,10 @@ body{
 #frame {
   position: absolute;
   left: 2%;
-  top: 20px;
+  top: 18px;
   width: 96%;
-  height: 100%;
+  height: auto;
   overflow: hidden;
-  justify-content: center;
   border-radius: 8px;
   z-index: 1;
 }
