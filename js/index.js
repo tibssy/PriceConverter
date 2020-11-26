@@ -16,7 +16,9 @@ function openCvReady() {
       let begin = Date.now();
       cap.read(img);
       cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
+      console.log("gray: " + gray.rows + "x" + gray.cols);
       roi_gray = gray.roi(rect);
+      console.log("roi: " + roi_gray.cols + "x" + roi_gray.rows);
       cv.threshold(roi_gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
 
 
@@ -79,7 +81,7 @@ function auto_inv(dst) {
 // the code starts here
 let video = document.getElementById("videoInput");
 navigator.mediaDevices
-  .getUserMedia({ video: { width: 1080, height: 1920, facingMode: "environment" }, audio: false })
+  .getUserMedia({ video: { width: 1920, height: 1080, facingMode: "environment" }, audio: false })
   .then(function (stream) {
     video.srcObject = stream;
     video.play();
