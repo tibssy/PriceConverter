@@ -26,6 +26,20 @@ body{
   margin-bottom: -30vh;
 }
 
+#frame {
+  position: relative;
+  padding-top: 100px;
+  width: 60vw;
+  height: auto;
+  overflow: hidden;
+  display: block;
+  transform: scale(1.57);
+  margin: auto;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px 0;
+  z-index: 1;
+}
+
 .res {
   position: relative;
   margin: auto;
@@ -43,4 +57,4 @@ p {
   font-size: 50px;
   font-family: "Times New Roman", Times, serif;
   
-} */
+}

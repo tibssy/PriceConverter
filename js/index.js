@@ -79,7 +79,7 @@ function auto_inv(dst) {
 // the code starts here
 let video = document.getElementById("videoInput");
 navigator.mediaDevices
-  .getUserMedia({ video: { width: 1280, height: 720, facingMode: "environment" }, audio: false })
+  .getUserMedia({ video: { width: 1920, height: 1080, facingMode: "environment" }, audio: false })
   .then(function (stream) {
     video.srcObject = stream;
     video.play();
