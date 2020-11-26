@@ -2,7 +2,9 @@ function openCvReady() {
   cv["onRuntimeInitialized"] = () => {
     let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
     let gray = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-    let thresh = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    const rect = new cv.Rect(220, 720, 640, 480);
+    let roi_gray = new cv.Mat();
+    let thresh = new cv.Mat();
     let label = new cv.Mat();
     let stats = new cv.Mat();
     let centroids = new cv.Mat();
@@ -14,11 +16,8 @@ function openCvReady() {
       let begin = Date.now();
       cap.read(img);
       cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
-      console.log("gray: " + gray.cols + "x" + gray.cols);
-      const rect = new cv.Rect(220, 720, 640, 480);
-      gray = gray.roi(rect);
-      console.log("roi: " + gray.cols + "x" + gray.cols);
-      cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
+      roi_gray = gray.roi(rect);
+      cv.threshold(roi_gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
 
 
       thresh = auto_inv(thresh);
@@ -80,7 +79,7 @@ function auto_inv(dst) {
 // the code starts here
 let video = document.getElementById("videoInput");
 navigator.mediaDevices
-  .getUserMedia({ video: { width: 1920, height: 1080, facingMode: "environment" }, audio: false })
+  .getUserMedia({ video: { width: 1080, height: 1920, facingMode: "environment" }, audio: false })
   .then(function (stream) {
     video.srcObject = stream;
     video.play();
