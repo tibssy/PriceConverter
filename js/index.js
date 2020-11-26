@@ -15,9 +15,9 @@ function openCvReady() {
     function processVideo() {
       let begin = Date.now();
       cap.read(img);
-      img_roi = img.roi(rect);
-      cv.cvtColor(img_roi, gray, cv.COLOR_RGBA2GRAY);
-      cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
+      cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
+      img_roi = gray.roi(rect);
+      cv.threshold(img_roi, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
 
 
       thresh = auto_inv(thresh);
