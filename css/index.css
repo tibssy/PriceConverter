@@ -4,7 +4,6 @@ body{
 
 .cont {
   padding-top: 10px;
-  background-color: cadetblue;
   width: 62vw;
   transform-origin: top;
   transform: scale(1.6);
@@ -33,9 +32,9 @@ body{
   position: absolute;
   background-color: #ffeac8;
   left: 2vw;
-  bottom: 100px;
+  bottom: 20px;
   width: 96vw;
-  height: 30vh;
+  height: 20vh;
   border-radius: 8px;
   box-shadow: 0 8px 16px 0;
 }
