@@ -2,17 +2,20 @@ body{
   background-color: moccasin;
 }
 
-.a {
-  padding-top: 100px;
+.cont {
+  padding-top: 10px;
+  background-color: cadetblue;
+  width: 62vw;
+  transform-origin: top;
+  transform: scale(1.6);
+  margin: auto;
 }
 
 .cntr {
-  position: relative;
   width: 60vw;
   height: auto;
   overflow: hidden;
   display: block;
-  transform: scale(1.6);
   margin: auto;
   border-radius: 5px;
   box-shadow: 0 5px 10px 0;
@@ -26,24 +29,13 @@ body{
   margin-bottom: -30vh;
 }
 
-#frame {
-  position: absolute;
-  left: 2%;
-  top: 18px;
-  width: 96%;
-  height: auto;
-  overflow: hidden;
-  border-radius: 8px;
-  z-index: 1;
-}
-
 .res {
-  position: relative;
-  margin: auto;
+  position: absolute;
   background-color: #ffeac8;
-  top: 100px;
-  width: 94vw;
-  height: 160px;
+  left: 2vw;
+  bottom: 100px;
+  width: 96vw;
+  height: 30vh;
   border-radius: 8px;
   box-shadow: 0 8px 16px 0;
 }
