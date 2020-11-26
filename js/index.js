@@ -2,7 +2,7 @@ function openCvReady() {
   cv["onRuntimeInitialized"] = () => {
     let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
     let gray = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-    const rect = new cv.Rect(220, 720, 640, 480);
+    const rect = new cv.Rect(144, 384, 432, 512);
     let roi_gray = new cv.Mat();
     let thresh = new cv.Mat();
     let label = new cv.Mat();
