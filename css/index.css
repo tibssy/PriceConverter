@@ -51,5 +51,6 @@ p {
   position: absolute;
   margin: auto;
   width: 97%;
+  height: auto;
   border-radius: 6px;
 }
