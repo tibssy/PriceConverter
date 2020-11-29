@@ -7,6 +7,7 @@ const assets = [
   'js/opencv.js',
   'js/stfilter.js',
   'js/mathjs/math.js',
+  'img/frame.png',
   'css/index.css',
   'css/bootstrap.min.css',
   'css/bootstrap.min.css.map',

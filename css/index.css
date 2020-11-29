@@ -46,3 +46,10 @@ p {
   font-family: "Times New Roman", Times, serif;
   
 }
+
+#brd {
+  position: absolute;
+  margin: auto;
+  width: 97%;
+  border-radius: 6px;
+}
