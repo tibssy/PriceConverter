@@ -1,4 +1,5 @@
 if ("serviceWorker" in navigator) {
+  downloadData();
   navigator.serviceWorker
     .register("sw.js")
     .then((reg) => console.log("service worker registered", reg))

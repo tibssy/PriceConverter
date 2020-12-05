@@ -39,6 +39,7 @@ function openCvReady() {
             });
             //console.log("result: ", result);
             document.getElementById("result").innerHTML = result;
+            readData(result);
           }
         }
       }
