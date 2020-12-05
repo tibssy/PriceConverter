@@ -25,7 +25,7 @@ function readData(result) {
 
     localforage.getItem(cur, function (err, value) {
         console.log(value);
-        let result2 = result * value;
+        let result2 = Math.round(result * value);
         document.getElementById("result2").innerHTML = result2;
     });
 
