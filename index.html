@@ -12,20 +12,45 @@
   <meta name="theme-color" content="#FFE1C4">
   <script src="js/tools/math.js" type="text/javascript"></script>
   <script src="data/data.json"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-  <div class="cont">
-    <div class="cntr">
-      <img id="brd" src="img/frame.png">
-      <video id="videoInput" width="720" height="1280"></video>
-    </div>
+  <section id="settingsScreen">
+    <div class="container mt-3">
+      <form>
+          <select class="custom-select mb-3" id="select1" size="9" onchange="getSelectValue('select1')"></select>
+          <select class="custom-select mb-3" id="select2" size="9" onchange="getSelectValue('select2')"></select>
+      </form>
   </div>
 
-  <div class="res">
-    <p id="result"></p>
-    <p id="result2"></p>
+  <div class="container">
+      <div class="row">
+          <p id="rate1"></p>
+          <p id="rate2"></p>
+      </div>
+      <p id="rate3"></p>
   </div>
+    
+  <button class="button" onclick="changeDisplay('convert')" id="OK">Scan</button>
+  </section>
+
+  <section id="converterScreen">
+    <div class="cont">
+      <div class="cntr">
+        <img id="brd" src="img/frame.png">
+        <video id="videoInput" width="720" height="1280"></video>
+      </div>
+    </div>
+  
+    <div class="res">
+      <p id="result"></p>
+      <p id="result2"></p>
+    </div>
+      <button class="button" onclick="changeDisplay('settings')" id="settings">Settings</button>
+  </section>
 
   <script src="js/tools/localforage.js"></script>
   <script src="js/database.js"></script>
@@ -35,5 +60,4 @@
   <script src="js/onr.js" type="text/javascript"></script>
   <script src="js/app.js"></script>
 </body>
-
 </html>

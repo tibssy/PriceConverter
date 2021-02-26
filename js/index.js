@@ -1,5 +1,50 @@
+//for section settingsScreen
+function downloadData() {
+  const Http = new XMLHttpRequest();
+  const url = 'https://api.exchangeratesapi.io/latest';
+
+  Http.open('GET', url);
+  Http.send();
+
+  Http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let rates = JSON.parse(Http.responseText);
+
+      selectVal(rates, 'select1');
+      selectVal(rates, 'select2');
+    }
+  };
+}
+
+function selectVal(rates, s) {
+  let sel = document.getElementById(s);
+
+  Object.entries(rates.rates).forEach((entry) => {
+    const [key, value] = entry;
+    var opt = document.createElement('option');
+    opt.innerHTML = key;
+    opt.value = value;
+    sel.appendChild(opt);
+  });
+}
+
+function getSelectValue(s) {
+  const selectedValue = document.getElementById(s).value;
+  console.log('id: ', document.getElementById(s).firstChild.textContent);
+  console.log(s + ': ', selectedValue);
+  if (s == 'select1') {
+    rate1 = document.getElementById('rate1').innerHTML = selectedValue;
+  } else if (s == 'select2') {
+    rate2 = document.getElementById('rate2').innerHTML = selectedValue;
+  }
+}
+
+let rate1 = 1;
+downloadData();
+
+// for section converterScreen
 function openCvReady() {
-  cv["onRuntimeInitialized"] = () => {
+  cv['onRuntimeInitialized'] = () => {
     const rect = new cv.Rect(144, 384, 432, 512);
     let img = new cv.Mat(video.height, video.width, cv.CV_8UC4);
     let img_roi = new cv.Mat();
@@ -19,26 +64,48 @@ function openCvReady() {
       cv.cvtColor(img_roi, gray, cv.COLOR_RGBA2GRAY);
       cv.threshold(gray, thresh, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU);
 
-
       thresh = auto_inv(thresh);
-      cv.connectedComponentsWithStats(thresh, label, stats, centroids, 8, cv.CV_32S);
+      cv.connectedComponentsWithStats(
+        thresh,
+        label,
+        stats,
+        centroids,
+        8,
+        cv.CV_32S
+      );
       let res = prepare_stats(stats);
       if (res.length >= 2) {
         res = filter(res, resolution);
         if (res.length >= 1) {
           if (feedback(res, resolution) >= 4) {
-            let result = "";
-            res.forEach(segment => {
+            let result = '';
+            res.forEach((segment) => {
               let point1 = new cv.Point(segment[0], segment[1]);
-              let point2 = new cv.Point(segment[0] + segment[2], segment[1] + segment[3]);
-              cv.rectangle(img, point1, point2, [0, 255, 0, 255], 2, cv.LINE_AA, 0);
-              let rect = new cv.Rect(segment[0], segment[1], segment[2], segment[3]);
+              let point2 = new cv.Point(
+                segment[0] + segment[2],
+                segment[1] + segment[3]
+              );
+              cv.rectangle(
+                img,
+                point1,
+                point2,
+                [0, 255, 0, 255],
+                2,
+                cv.LINE_AA,
+                0
+              );
+              let rect = new cv.Rect(
+                segment[0],
+                segment[1],
+                segment[2],
+                segment[3]
+              );
               sgmt = thresh.roi(rect);
               let num = detect(sgmt);
               result += num;
             });
             //console.log("result: ", result);
-            document.getElementById("result").innerHTML = result;
+            document.getElementById('result').innerHTML = result;
             readData(result);
           }
         }
@@ -54,40 +121,58 @@ function openCvReady() {
   };
 }
 
-
 function prepare_stats(stats) {
   let cols = stats.cols;
   let rows = stats.rows;
   let arr = Array.from(stats.data32S);
   let reshaped = math.reshape(arr, [rows, cols]);
-  return reshaped.slice(1).map(i => i.slice(0, 4));
+  return reshaped.slice(1).map((i) => i.slice(0, 4));
 }
 
-
 function feedback(stats, resolution) {
-  let last_col = stats[stats.length - 1]
+  let last_col = stats[stats.length - 1];
   let point1 = math.dotMultiply([stats[0][0], stats[0][1]], -1);
   let point2 = [last_col[0] + last_col[2], last_col[1] + last_col[3]];
   let big_area = math.prod(math.add(point2, point1));
-  return big_area / math.prod(resolution) * 100;
+  return (big_area / math.prod(resolution)) * 100;
 }
 
 function auto_inv(dst) {
-  Math.round(cv.countNonZero(dst) / (dst.cols * dst.rows) * 100) > 50 ? cv.bitwise_not(dst, dst) : false;
+  Math.round((cv.countNonZero(dst) / (dst.cols * dst.rows)) * 100) > 50
+    ? cv.bitwise_not(dst, dst)
+    : false;
   return dst;
 }
 
+//function to change displayed block
+changeDisplay = (direction) => {
+  let settingsScreen = document.getElementById('settingsScreen');
+  let converterScreen = document.getElementById('converterScreen');
+  switch (direction) {
+    case 'settings':
+      settingsScreen.style.display = 'block';
+      converterScreen.style.display = 'none';
+      break;
+    case 'convert':
+      settingsScreen.style.display = 'none';
+      converterScreen.style.display = 'block';
+      break;
+  }
+};
+
 // the code starts here
-let video = document.getElementById("videoInput");
+let video = document.getElementById('videoInput');
 navigator.mediaDevices
-  .getUserMedia({ video: { width: 1920, height: 1080, facingMode: "environment" }, audio: false })
+  .getUserMedia({
+    video: { width: 1920, height: 1080, facingMode: 'environment' },
+    audio: false,
+  })
   .then(function (stream) {
     video.srcObject = stream;
     video.play();
   })
   .catch(function (err) {
-    console.log("An error occurred! " + err);
+    console.log('An error occurred! ' + err);
   });
 
 openCvReady();
-
